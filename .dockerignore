@@ -1,0 +1,13 @@
+.git
+.gitignore
+.github
+.idea
+.vscode
+*.md
+!LICENSE*
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml
+.dockerignore
+node_modules
+upload/include/ost-config.php

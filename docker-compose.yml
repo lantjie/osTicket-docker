@@ -1,0 +1,13 @@
+services:
+  osticket:
+    build: .
+    restart: unless-stopped
+    environment:
+      TZ: ${TZ:-UTC}
+    volumes:
+      - osticket_config:/var/www/html/include
+    expose:
+      - "80"
+
+volumes:
+  osticket_config:
