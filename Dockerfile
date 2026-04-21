@@ -50,6 +50,8 @@ session.cookie_secure=1\n\
 
 COPY upload/ /var/www/html/
 COPY scripts/ /opt/osticket-scripts/
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Seed ost-config.php from the sample so the installer can write to it on first run.
 # After install completes, chmod 0644 it (see README / deploy docs).
@@ -59,4 +61,11 @@ RUN if [ ! -f /var/www/html/include/ost-config.php ]; then \
     && chown -R www-data:www-data /var/www/html \
     && chmod 0666 /var/www/html/include/ost-config.php
 
+RUN mkdir -p /var/lib/osticket/attachments \
+    && chown -R www-data:www-data /var/lib/osticket \
+    && chmod 0750 /var/lib/osticket/attachments
+
 EXPOSE 80
+
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["apache2-foreground"]

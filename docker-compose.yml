@@ -6,8 +6,10 @@ services:
       TZ: ${TZ:-UTC}
     volumes:
       - osticket_config:/var/www/html/include
+      - osticket_attachments:/var/lib/osticket/attachments
     expose:
       - "80"
 
 volumes:
   osticket_config:
+  osticket_attachments:
